@@ -6,6 +6,7 @@ import me.jellysquid.mods.sodium.client.util.math.JomlHelper;
 import net.minecraft.client.renderer.culling.Frustum;
 import org.apache.commons.lang3.Validate;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,6 +42,6 @@ public class MixinFrustum implements FrustumAdapter {
         matrix.mul(Validate.notNull(this.modelViewMatrix));
         matrix.translate((float) -this.camX, (float) -this.camY, (float) -this.camZ);
 
-        return new JomlFrustum(matrix);
+        return new JomlFrustum(matrix, new Vector3f((float) this.x, (float) this.y, (float) this.z));
     }
 }
