@@ -165,7 +165,6 @@ dependencies {
 
     library("org.joml:joml:1.10.2")
     library("blank:magapi:1.0")
-    shadow "org.joml:joml:1.10.2"
 
     api("org.joml:joml:1.10.2")
     api("blank:magapi:1.0")
