@@ -38,7 +38,7 @@ public class MixinParticleManager {
     }
 
     @SuppressWarnings({ "SuspiciousMethodCalls", "unchecked" })
-    @Redirect(method = "render", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
+    @Redirect(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;Lnet/minecraft/client/renderer/LightTexture;Lnet/minecraft/client/Camera;FLnet/minecraft/client/renderer/culling/Frustum;)V", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"), remap = false)
     private <V> V filterParticleList(Map<ParticleRenderType, Queue<Particle>> map, Object key, PoseStack matrixStack, MultiBufferSource.BufferSource immediate, LightTexture lightmapTextureManager, Camera camera, float f) {
         Queue<Particle> queue = this.particles.get(key);
 
