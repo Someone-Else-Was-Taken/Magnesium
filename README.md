@@ -1,9 +1,9 @@
 <img src="src/main/resources/assets/sodium/icon.png" width="128">
 
 # Magnesium (for Forge)
-![GitHub license](https://img.shields.io/github/license/CaffeineMC/sodium-fabric.svg)
-![GitHub issues](https://img.shields.io/github/issues/CaffeineMC/sodium-fabric.svg)
-![GitHub tag](https://img.shields.io/github/tag/CaffeineMC/sodium-fabric.svg)
+![GitHub license](https://img.shields.io/github/license/Someone-Else-Was-Taken/Magnesium.svg)
+![GitHub issues](https://img.shields.io/github/issues/Someone-Else-Was-Taken/Magnesium.svg)
+![GitHub tag](https://img.shields.io/github/tag/Someone-Else-Was-Taken/Magnesium.svg)
 
 Magnesium is a free and open-source optimization mod for the Minecraft client that improves frame rates, reduces
 micro-stutter, and fixes graphical issues in Minecraft. 
@@ -13,7 +13,6 @@ graphical issues or crashes while using it.
 
 ### CurseForge
 
-[![CurseForge downloads](http://cf.way2muchnoise.eu/full_394468_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/sodium-reforged)
 
 If you are using the CurseForge client, you can continue to find downloads through our
 [CurseForge page](https://www.curseforge.com/minecraft/mc-mods/sodium-reforged). 
