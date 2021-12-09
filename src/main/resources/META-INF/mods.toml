@@ -7,7 +7,11 @@ version="0.4.0-alpha5" #mandatory
 displayName="Magnesium" #mandatory
 logoFile="icon.png" #optional
 description='''
+Magnesium is a Port of the Fabric Mod Sodium, which is a free and open-source optimization mod for Minecraft which improves frame rates and reduces lag spikes.
 '''
+credits="SomeoneElse, CaffeineMC" #optional
+# A text field displayed in the mod UI
+authors="SomeoneElse" #optional
 [[mods]] #mandatory
 modId="magapi" #mandatory
 version="Alpha 1" #mandatory
@@ -15,6 +19,7 @@ displayName="Magnesium Api" #mandatory
 logoFile="icon.png" #optional
 description='''
 '''
+authors="SomeoneElse" #optional
 [[dependencies.magnesium]] #optional
     # the modid of the dependency
     modId="forge" #mandatory
