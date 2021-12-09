@@ -99,7 +99,11 @@ public class OptionImpl<S, T> implements Option<T> {
 
     @Override
     public boolean hasChanged() {
-        return !this.value.equals(this.modifiedValue);
+        if(this.value != null) {
+            return !this.value.equals(this.modifiedValue);
+        }
+        return false;
+
     }
 
     @Override
