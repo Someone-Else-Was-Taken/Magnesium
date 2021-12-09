@@ -1,0 +1,36 @@
+modLoader="javafml" #mandatory
+loaderVersion="[35,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
+[[mods]] #mandatory
+modId="magnesium" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="Magnesium" #mandatory
+logoFile="icon.png" #optional
+description='''
+'''
+[[mods]] #mandatory
+modId="magapi" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="Magnesium Api" #mandatory
+logoFile="icon.png" #optional
+description='''
+'''
+[[dependencies.magnesium]] #optional
+    # the modid of the dependency
+    modId="forge" #mandatory
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+    # The version range of the dependency
+    versionRange="[38,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
+# Here's another dependency
+[[dependencies.magnesium]]
+    modId="minecraft"
+    mandatory=true
+# This version range declares a minimum of the current minecraft version up to but not including the next major version
+    versionRange="[1.18]"
+    ordering="NONE"
+    side="BOTH"

@@ -1,31 +1,26 @@
-# gradle
-
-.gradle/
-build/
-out/
-classes/
-
-# idea
-
-.idea/
-*.iml
-*.ipr
-*.iws
-
-# vscode
-
-.settings/
-.vscode/
-bin/
+# eclipse
+bin
+*.launch
+.settings
+.metadata
 .classpath
 .project
 
-# fabric
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
 
-run/
+# gradle
+build
+.gradle
 
-# macOS
+# other
+eclipse
+run
+libs
 
-.DS_Store
-.AppleDouble
-.LSOverride
+# Files from Forge MDK
+forge*changelog.txt

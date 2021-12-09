@@ -1,37 +1,40 @@
 package me.jellysquid.mods.sodium.client;
 
 import me.jellysquid.mods.sodium.client.gui.SodiumGameOptions;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
-public class SodiumClientMod implements ClientModInitializer {
+@Mod("magnesium")
+public class SodiumClientMod {
+
+    public SodiumClientMod() {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+    }
+
     private static SodiumGameOptions CONFIG;
     private static Logger LOGGER;
 
     private static String MOD_VERSION;
 
-    @Override
-    public void onInitializeClient() {
-        ModContainer mod = FabricLoader.getInstance()
-                .getModContainer("sodium")
-                .orElseThrow(NullPointerException::new);
+    public void setup(final FMLClientSetupEvent event) {
+        MOD_VERSION = ModList.get().getModContainerById("magnesium").get().getModInfo().getVersion().toString();
 
-        MOD_VERSION = mod.getMetadata()
-                .getVersion()
-                .getFriendlyString();
+        LOGGER = LogManager.getLogger("Magnesium");
 
-        LOGGER = LogManager.getLogger("Sodium");
-        CONFIG = loadConfig();
     }
 
     public static SodiumGameOptions options() {
         if (CONFIG == null) {
-            throw new IllegalStateException("Config not yet available");
+            CONFIG = loadConfig();
         }
 
         return CONFIG;
@@ -46,17 +49,9 @@ public class SodiumClientMod implements ClientModInitializer {
     }
 
     private static SodiumGameOptions loadConfig() {
-        try {
-            return SodiumGameOptions.load();
-        } catch (Exception e) {
-            LOGGER.error("Failed to load configuration file", e);
-            LOGGER.error("Using default configuration file in read-only mode");
+        SodiumGameOptions config = SodiumGameOptions.load(Paths.get("config", "sodium-options.json"));
 
-            var config = new SodiumGameOptions();
-            config.setReadOnly();
-
-            return config;
-        }
+        return config;
     }
 
     public static void restoreDefaultOptions() {
@@ -76,6 +71,7 @@ public class SodiumClientMod implements ClientModInitializer {
 
         return MOD_VERSION;
     }
+
 
     public static boolean isDirectMemoryAccessEnabled() {
         return options().advanced.allowDirectMemoryAccess;

@@ -1,6 +1,6 @@
 package me.jellysquid.mods.sodium.common.util;
 
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
 
 import java.util.Arrays;
 

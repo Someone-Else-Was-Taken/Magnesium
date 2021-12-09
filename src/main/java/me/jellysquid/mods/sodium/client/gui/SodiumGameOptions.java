@@ -4,11 +4,10 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.jellysquid.mods.sodium.client.gui.options.TextProvider;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.option.GraphicsMode;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.client.GraphicsStatus;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -73,14 +72,14 @@ public class SodiumGameOptions {
         ASYNC("sodium.options.chunk_memory_allocator.async"),
         SWAP("sodium.options.chunk_memory_allocator.swap");
 
-        private final Text name;
+        private final Component name;
 
         ArenaMemoryAllocator(String name) {
-            this.name = new TranslatableText(name);
+            this.name = new TranslatableComponent(name);
         }
 
         @Override
-        public Text getLocalizedName() {
+        public Component getLocalizedName() {
             return this.name;
         }
     }
@@ -90,19 +89,19 @@ public class SodiumGameOptions {
         FANCY("options.clouds.fancy"),
         FAST("options.clouds.fast");
 
-        private final Text name;
+        private final Component name;
 
         GraphicsQuality(String name) {
-            this.name = new TranslatableText(name);
+            this.name = new TranslatableComponent(name);
         }
 
         @Override
-        public Text getLocalizedName() {
+        public Component getLocalizedName() {
             return this.name;
         }
 
-        public boolean isFancy(GraphicsMode graphicsMode) {
-            return (this == FANCY) || (this == DEFAULT && (graphicsMode == GraphicsMode.FANCY || graphicsMode == GraphicsMode.FABULOUS));
+        public boolean isFancy(GraphicsStatus graphicsMode) {
+            return (this == FANCY) || (this == DEFAULT && (graphicsMode == GraphicsStatus.FANCY || graphicsMode == GraphicsStatus.FABULOUS));
         }
     }
 
@@ -112,12 +111,8 @@ public class SodiumGameOptions {
             .excludeFieldsWithModifiers(Modifier.PRIVATE)
             .create();
 
-    public static SodiumGameOptions load() {
-        return load(DEFAULT_FILE_NAME);
-    }
 
-    public static SodiumGameOptions load(String name) {
-        Path path = getConfigPath(name);
+    public static SodiumGameOptions load(Path path) {
         SodiumGameOptions config;
 
         if (Files.exists(path)) {
@@ -131,7 +126,6 @@ public class SodiumGameOptions {
         }
 
         config.configPath = path;
-        config.sanitize();
 
         try {
             config.writeChanges();
@@ -149,9 +143,7 @@ public class SodiumGameOptions {
     }
 
     private static Path getConfigPath(String name) {
-        return FabricLoader.getInstance()
-                .getConfigDir()
-                .resolve(name);
+        return FMLPaths.CONFIGDIR.get().resolve(name);
     }
 
     public void writeChanges() throws IOException {

@@ -61,7 +61,6 @@ public class XoRoShiRoRandom extends Random {
         return (int) this.nextLong(n);
     }
 
-    @Override
     public long nextLong(final long n) {
         if (n <= 0) {
             throw new IllegalArgumentException("illegal bound " + n + " (must be positive)");
