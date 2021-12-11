@@ -40,8 +40,7 @@ public class MixinFrustum implements FrustumAdapter {
         Matrix4f matrix = new Matrix4f();
         matrix.set(Validate.notNull(this.projectionMatrix));
         matrix.mul(Validate.notNull(this.modelViewMatrix));
-        matrix.translate((float) -this.camX, (float) -this.camY, (float) -this.camZ);
 
-        return new JomlFrustum(matrix, new Vector3f((float) this.x, (float) this.y, (float) this.z));
+        return new JomlFrustum(matrix, new Vector3f((float) this.camX, (float) this.camY, (float) this.camZ));
     }
 }
