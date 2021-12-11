@@ -48,7 +48,7 @@ public class SodiumGameOptions {
     }
 
     public static class AdvancedSettings {
-        public ArenaMemoryAllocator arenaMemoryAllocator = null;
+        public ArenaMemoryAllocator arenaMemoryAllocator = ArenaMemoryAllocator.ASYNC;
 
         public boolean allowDirectMemoryAccess = true;
         public boolean enableMemoryTracing = false;
