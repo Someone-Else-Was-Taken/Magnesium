@@ -24,10 +24,12 @@ public class SodiumClientMod {
     private static Logger LOGGER;
 
     private static String MOD_VERSION;
+    public static boolean hasFlywheel;
 
     public void setup(final FMLClientSetupEvent event) {
         MOD_VERSION = ModList.get().getModContainerById("magnesium").get().getModInfo().getVersion().toString();
 
+        hasFlywheel = ModList.get().isLoaded("flywheel");
         LOGGER = LogManager.getLogger("Magnesium");
 
     }
