@@ -75,6 +75,7 @@ public class RegionChunkRenderer extends ShaderChunkRenderer {
         ChunkShaderInterface shader = this.activeProgram.getInterface();
 
         shader.setProjectionMatrix(matrices.projection());
+        shader.setModelViewMatrix(matrices.modelView());
         shader.setDrawUniforms(this.chunkInfoBuffer);
 
         for (Map.Entry<RenderRegion, List<RenderSection>> entry : sortedRegions(list, pass.isTranslucent())) {
@@ -85,7 +86,7 @@ public class RegionChunkRenderer extends ShaderChunkRenderer {
                 continue;
             }
 
-            this.setModelMatrixUniforms(shader, matrices, region, camera);
+            this.setModelMatrixUniforms(shader, region, camera);
             this.executeDrawBatches(commandList, this.createTessellationForRegion(commandList, region.getArenas(), pass));
         }
         
@@ -180,16 +181,13 @@ public class RegionChunkRenderer extends ShaderChunkRenderer {
 
     private final Matrix4f cachedModelViewMatrix = new Matrix4f();
 
-    private void setModelMatrixUniforms(ChunkShaderInterface shader, ChunkRenderMatrices matrices, RenderRegion region, ChunkCameraContext camera) {
+    private void setModelMatrixUniforms(ChunkShaderInterface shader, RenderRegion region, ChunkCameraContext camera) {
         float x = getCameraTranslation(region.getOriginX(), camera.blockX, camera.deltaX);
         float y = getCameraTranslation(region.getOriginY(), camera.blockY, camera.deltaY);
         float z = getCameraTranslation(region.getOriginZ(), camera.blockZ, camera.deltaZ);
 
-        Matrix4f matrix = this.cachedModelViewMatrix;
-        matrix.set(matrices.modelView());
-        matrix.translate(x, y, z);
 
-        shader.setModelViewMatrix(matrix);
+        shader.setRegionOffset(x, y, z);
     }
 
     private void addDrawCall(ElementRange part, long baseIndexPointer, int baseVertexIndex) {
